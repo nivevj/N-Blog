@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    
+<br>
+<h1>Blogs for you</h1>
+<br>
+<ul>
+{% for post in object_list %}
+    <li><h5><a href="{% url 'article-detail' post.pk %}" class="text-decoration-none link-secondary">{{ post.title }}</a></h5> 
+        by <i>{{ post.author.first_name }}&nbsp;{{ post.author.last_name }}</i> | created on <i>{{ post.post_date }}</i> <br><br>
+        <a href="{% url 'category' post.category|slugify %}" class="text-decoration-none link-success"><b>{{ post.category }}</b></a> | "{{post.body|slice:":100"|safe}}..."
+        {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+         <br><br>
+         <small><a href="{% url 'update_post' post.pk %}"><button class="btn btn-warning btn-sm">Edit</button></small></a> &nbsp;
+         <small><a href="{% url 'delete_post' post.pk %}"><button class="btn btn-danger btn-sm">Delete</button></small></a>
+         <br><br>
+        {% endif %}
+        {% endif %}
+        <hr>
+    </li>
+{% endfor %}
+</ul>
+
+
+{% endblock %}
