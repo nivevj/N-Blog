@@ -1,7 +1,7 @@
 from django import forms
 from . models import Post, Category
 
-#choices=[('coding','coding'),('sports','sports')]
+#=choices=[('coding','coding'),('sports','sports')]
 choices=Category.objects.all().values_list('name','name')
 choices_list=[]
 for item in choices:
