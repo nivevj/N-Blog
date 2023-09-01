@@ -10,7 +10,7 @@
 {% for post in object_list %}
     <li><h5><a href="{% url 'article-detail' post.pk %}" class="text-decoration-none link-secondary">{{ post.title }}</a></h5> 
         by <i>{{ post.author.first_name }}&nbsp;{{ post.author.last_name }}</i> | created on <i>{{ post.post_date }}</i> <br><br>
-        <a href="{% url 'category' post.category|slugify %}" class="text-decoration-none link-success"><b>{{ post.category }}</b></a> | "{{post.body|slice:":100"|safe}}..."
+        <a href="{% url 'category' post.category|slugify %}" class="text-decoration-none link-success"><b>{{ post.category }}</b></a>  | {{post.snippet}} <!--"{{post.body|slice:":50"|safe}}..."-->
         {% if user.is_authenticated %}
         {% if user.id == post.author.id %}
          <br><br>
