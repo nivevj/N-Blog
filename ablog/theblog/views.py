@@ -39,7 +39,7 @@ def CategoryListView(request):
 
 def CategoryView(request,cats):
     category_post=Post.objects.filter(category=cats.replace('-',' '))
-    return render(request,'categories.html',{'cats':cats.title().replace('-',' '),'category_post':category_post})
+    return render(request,'categories.html',{'cats':cats.title(),'category_post':category_post})
 
 class ArticleDetailView(DetailView):
     model=Post
@@ -63,7 +63,7 @@ class AddPostView(CreateView):
     model=Post
     form_class=PostForm
     template_name="add_post.html"
-    #fields='__all__' #puts all the fields
+    # fields='__all__' #puts all the fields
 
 
 class AddCategoryView(CreateView):
