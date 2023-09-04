@@ -9,7 +9,11 @@
 <br>
 <h1>{{ post.title }}</h1>
 <small>By: {{ post.author.first_name }}&nbsp;{{ post.author.last_name }} | {{post.post_date}}</small><br>
-<hr><br> 
+<hr><br> {% if post.header_image %}
+<div style="text-align: center;">
+<img src="{{ post.header_image.url }}" height="200" width="auto"><br><br>
+</div>
+{% endif %}
 {{ post.body|safe }}
 
 <br><br><br>
