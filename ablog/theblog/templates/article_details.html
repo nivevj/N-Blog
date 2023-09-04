@@ -41,7 +41,7 @@
             <br><br>
         {% endif %}
     {% else %}
-        <sm>Login to Upvote!</sm>
+        <sm>Login to Upvote!</sm><br><br>
     {% endif %}
     <hr><br> 
     
@@ -61,16 +61,16 @@
               <h5 class="card-title">{{post.author.first_name}} {{post.author.last_name}}</h5>
               <p class="card-text"><small class="text-muted">
                 {% if post.author.profile.website_url %}
-                 <i>  <a href="{{post.author.profile.website_url.url}}" class="link-dark" style="text-decoration: none;"> Website </a> </i>
+                 <i>  <a href="{{post.author.profile.website_url}}" class="link-dark" style="text-decoration: none;"> Website </a> </i>
                 {% endif %}
                 {% if post.author.profile.instagram_url %}    
-                    | <i><a href="post.author.profile.instagram_url.url" class="link-dark" style="text-decoration: none;"> Instagram </a> </i>
+                    | <i><a href="{{post.author.profile.instagram_url}}" class="link-dark" style="text-decoration: none;"> Instagram </a> </i>
                 {% endif %}
                 {% if post.author.profile.linkedin_url %}       
-                    | <i> <a href="post.author.profile.linkedin_url.url" class="link-dark" style="text-decoration: none;"> Linkedin </a> </i>
+                    | <i> <a href="{{post.author.profile.linkedin_url}}" class="link-dark" style="text-decoration: none;"> Linkedin </a> </i>
                 {% endif %}
                 {% if post.author.profile.twitter_url %}    
-                    | <i> <a href="post.author.profile.twitter_url.url" class="link-dark" style="text-decoration: none;"> Twitter </a> </i>
+                    | <i> <a href="{{post.author.profile.twitter_url}}" class="link-dark" style="text-decoration: none;"> Twitter </a> </i>
                 {% endif %}
             </small></p>
               <p class="card-text">{{ post.author.profile.bio }}</p>

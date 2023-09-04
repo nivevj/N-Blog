@@ -38,7 +38,7 @@ def CategoryListView(request):
     return render(request,'categories_list.html',{'cat_menu_list':cat_menu_list})
 
 def CategoryView(request,cats):
-    category_post=Post.objects.filter(category=cats.replace('-',' '))
+    category_post=Post.objects.filter(category=cats.replace('-',' ').title())
     return render(request,'categories.html',{'cats':cats.title(),'category_post':category_post})
 
 class ArticleDetailView(DetailView):
