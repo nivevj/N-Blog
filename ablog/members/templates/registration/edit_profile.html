@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Profile
+    Data Update
 {% endblock %}
 
 
 {% block content %}
+<br>
+<h1>Update Details</h1>
+<br>
     
-<br>
-<h1>Make it more impressive!</h1>
-<br>
-{{user.profile.bio}}
-<br><br>
+        {{user.profile.bio}}
+        <br><br>
 
-<div class="form-group">
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-success">UPDATE</button>
-</form>
-</div>
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-success">UPDATE</button><br><br>
+            </form>
+        </div>
 
 {% endblock %}
