@@ -12,10 +12,12 @@
         by <i>{{ post.author.first_name }}&nbsp;{{ post.author.last_name }}</i> | created on <i>{{ post.post_date }}</i> <br><br>
         <b>{{ post.category }}</b> | {{ post.snippet }}
         {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
          <br><br>
          <small><a href="{% url 'update_post' post.pk %}"><button class="btn btn-warning btn-sm">Edit</button></small></a> &nbsp;
          <small><a href="{% url 'delete_post' post.pk %}"><button class="btn btn-danger btn-sm">Delete</button></small></a>
          <br><br>
+        {% endif %}
         {% endif %}
         <hr>
     </li>
