@@ -51,7 +51,7 @@
         <div class="row g-0">
           <div class="col-md-2">
             {% if post.author.profile.profile_pic %}
-            <img src="{{ post.author.profile.profile_pic.url }}" class="img-fluid">
+            <img src="{{ post.author.profile.profile_pic.url }}" class="img-fluid" style="padding: 10%;">
             {% else %}
             <img src="{% static 'theblog/images/default.jpg' %}" class="img-fluid">
             {% endif %}
@@ -60,8 +60,9 @@
             <div class="card-body">
               <h5 class="card-title">{{post.author.first_name}} {{post.author.last_name}}</h5>
               <p class="card-text"><small class="text-muted">
+                <i> <a href="{% url 'show_profile_page' post.author.profile.id %}" class="link-dark" style="text-decoration: none;">Profile Page</a> </i> 
                 {% if post.author.profile.website_url %}
-                 <i>  <a href="{{post.author.profile.website_url}}" class="link-dark" style="text-decoration: none;"> Website </a> </i>
+                    | <i><a href="{{post.author.profile.website_url}}" class="link-dark" style="text-decoration: none;"> Website </a> </i>
                 {% endif %}
                 {% if post.author.profile.instagram_url %}    
                     | <i><a href="{{post.author.profile.instagram_url}}" class="link-dark" style="text-decoration: none;"> Instagram </a> </i>
