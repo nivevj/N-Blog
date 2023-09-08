@@ -14,7 +14,7 @@
 <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <p>( Please start with uppercase )</p><br>
+    <p>( Category should be a single word beginning with uppercase )</p><br>
     <button class="btn btn-success">ADD</button>
 </form>
 </div>
