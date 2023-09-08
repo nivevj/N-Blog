@@ -17,20 +17,18 @@
 {% endif %}
 {{ post.body|safe }}
 
-<br><br><br>
-
 {%if user.is_authenticated %}
 {% if user.id == post.author.id %}
+<br><br><br>
 <a href="{% url 'update_post' post.pk %}" class="btn btn-warning">EDIT</a> &nbsp;
 <a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn">DELETE</a> &nbsp;
 {% endif %}
 {%endif%}
-<a href="{% url 'home' %}" class="btn btn-secondary">BACK</a>
 
 <br><br><hr><br>
 <form action="{% url 'like_post' post.pk %}" method="POST">
     {% csrf_token %}
-    <b> {{ total_likes }} Upvotes</b> <br><br>
+    <h3> Upvotes : {{ total_likes }}</h3> <br>
     {%if user.is_authenticated %}
         {% if user.id != post.author.id %}
             {% if liked %}
@@ -44,7 +42,24 @@
         <sm>Login to Upvote!</sm><br><br>
     {% endif %}
     <hr><br> 
+
+    <h3>Comments :</h3><br>
+    {% if not post.comments.all %}
+    No commments yet...<br>
+    {% else %}
+    <ul>
+        {% for comment in post.comments.all %}
+        
+          <li><strong>{{comment.name}} - {{comment.date_added}}</strong> 
+            <br> {{comment.body}}
+        </li>
+        <br>
+        
+        {% endfor %}
+    </ul>
+    {% endif %}
     
+    <br><hr><br>
     <h1>About author</h1><br>
 
     <div class="card mb-3">
