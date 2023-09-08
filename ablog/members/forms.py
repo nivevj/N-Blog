@@ -1,6 +1,32 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User 
 from django import forms
+from theblog.models import Profile
+
+class ProfilePageForm(forms.ModelForm):
+    class Meta:
+        model=Profile
+        fields=('bio','profile_pic','website_url','instagram_url','linkedin_url','twitter_url')
+        widgets={
+            'bio':forms.Textarea(attrs={'class':'form-control','placeholder':'Enter bio'}),
+            #'profile_pic':forms.TextInput(attrs={'class':'form-control','placeholder':'Enter title-tag'}),
+            'website_url':forms.TextInput(attrs={'class':'form-control','placeholder':'Enter website url'}),
+            'instagram_url':forms.TextInput(attrs={'class':'form-control','placeholder':'Enter instagram url'}),
+            'linkedin_url':forms.TextInput(attrs={'class':'form-control','placeholder':'Enter linkedin url'}),
+            'twitter_url':forms.TextInput(attrs={'class':'form-control','placeholder':'Enter twitter url'}),
+        }
+
+# class EditProfilePageForm(UserChangeForm):
+#     bio=forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
+#     profile_pic=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
+#     website_url=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
+#     instagram_url=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
+#     linkedin_url=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
+#     twitter_url=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
+
+#     class Meta:
+#         model=User
+#         fields=('bio','profile_pic','website_url','instagram_url','linkedin_url','twitter_url')
 
 class SignUpForm(UserCreationForm):
     email=forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
