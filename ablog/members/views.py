@@ -3,10 +3,10 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.views.generic import DetailView, CreateView
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, UserChangeForm 
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
-from .forms import SignUpForm, EditProfileForm, PasswordChangingForm, ProfilePageForm
+from .forms import SignUpForm, EditProfileForm, PasswordChangingForm, ProfilePageForm, ABCForm
 from theblog.models import Profile
 
 class CreateProfilePageView(CreateView):
@@ -17,11 +17,11 @@ class CreateProfilePageView(CreateView):
         form.instance.user=self.request.user
         return super().form_valid(form)
 
-
 class EditProfilePageView(generic.UpdateView):
     model=Profile
+    form_class=ABCForm
     template_name='registration/edit_profile_page.html'
-    fields=['bio','profile_pic','website_url','instagram_url','linkedin_url','twitter_url']
+    #fields=['bio','profile_pic','website_url','instagram_url','linkedin_url','twitter_url']
     success_url=reverse_lazy('home')
 
 class ShowProfilePageView(DetailView):
