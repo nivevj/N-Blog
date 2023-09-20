@@ -26,41 +26,8 @@
 {%endif%}
 
 <br><br><hr><br>
-<form action="{% url 'like_post' post.pk %}" method="POST">
-    {% csrf_token %}
-    <h3> Upvotes : {{ total_likes }}</h3> <br>
-    {%if user.is_authenticated %}
-        {% if user.id != post.author.id %}
-            {% if liked %}
-                <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-danger">DOWNVOTE</button>
-            {% else %}
-                <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-success">UPVOTE</button>
-            {% endif %}
-            <br><br>
-        {% endif %}
-    {% else %}
-        <sm>Login to Upvote!</sm><br><br>
-    {% endif %}
-    <hr><br> 
 
-    <h3>Comments :</h3><br>
-    {% if not post.comments.all %}
-    No commments yet...<br>
-    {% else %}
-    <ul>
-        {% for comment in post.comments.all %}
-        
-          <li><strong>{{comment.name}} - {{comment.date_added}}</strong> 
-            <br> {{comment.body}}
-        </li>
-        <br>
-        
-        {% endfor %}
-    </ul>
-    {% endif %}
-    
-    <br><hr><br>
-    <h1>About author</h1><br>
+<h1>About author</h1><br>
 
     <div class="card mb-3">
         <div class="row g-0">
@@ -99,6 +66,45 @@
           </div>
         </div>
       </div>
+
+<br><hr><br>
+
+<form action="{% url 'like_post' post.pk %}" method="POST">
+    {% csrf_token %}
+    <h3> Upvotes : {{ total_likes }}</h3> <br>
+    {%if user.is_authenticated %}
+        {% if user.id != post.author.id %}
+            {% if liked %}
+                <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-danger">DOWNVOTE</button>
+            {% else %}
+                <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-success">UPVOTE</button>
+            {% endif %}
+            <br><br>
+        {% endif %}
+    {% else %}
+        <sm>Login to Upvote!</sm><br><br>
+    {% endif %}
+    <hr><br> 
+
+    <h3>Comments :</h3><br>
+    {% if not post.comments.all %}
+    No commments yet... <br><br>
+    <a href="{% url 'add_comment' post.pk%}" class="link-secondary" style="text-decoration: none;">Click to add one</a>
+    <br>
+    {% else %}
+    <a href="{% url 'add_comment' post.pk%}" class="link-secondary" style="text-decoration: none;">Click to add comment</a>
+    <br><br>
+    <ul>
+        {% for comment in post.comments.all %}
+        
+          <li><strong>{{comment.name}} - {{comment.date_added}}</strong> 
+            <br> {{comment.body}}
+        </li>
+        <br>
+        
+        {% endfor %}
+    </ul>
+    {% endif %}
 
 </form>
 <br>

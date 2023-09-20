@@ -16,7 +16,7 @@ class ProfilePageForm(forms.ModelForm):
             'twitter_url':forms.TextInput(attrs={'class':'form-control','placeholder':'Enter twitter url'}),
         }
 class ABCForm(forms.ModelForm):
-    bio=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
+    bio=forms.CharField(max_length=200,widget=forms.TextInput(attrs={'class':'form-control'}))
     website_url=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
     instagram_url=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
     linkedin_url=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
