@@ -13,9 +13,18 @@
 <div class="form-group">
 <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-success">LOGIN</button>
-</form>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" name="username" placeholder="Username">
+        </div>
+        <br>
+        <div class="form-group">
+          <label>Password</label>  
+          <input type="password" class="form-control" name="password" placeholder="Password">
+        </div>
+        <br>
+        <button class="btn btn-success">LOGIN</button>
 </div>
+</form>
 
 {% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    User Profile
+{% endblock %}
+
+{% block content %}
+    
+<br>
+<h1>User Profile</h1>
+<br>
+
+    <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-2">
+            {% if page_user.profile_pic %}
+            <img src="{{ page_user.profile_pic.url }}" class="img-fluid" style="padding: 10%;">
+            {% else %}
+            <img src="{% static 'theblog/images/default.jpg' %}" class="img-fluid">
+            {% endif %}
+          </div>
+          <div class="col-md-10">
+            <div class="card-body">
+              <h5 class="card-title">{{page_user.user.first_name}} {{page_user.user.last_name}}</h5>
+              <p class="card-text"><small class="text-muted">
+                {% if page_user.website_url %}
+                    <i><a href="{{page_user.website_url}}" class="link-dark" style="text-decoration: none;"> Website </a> </i>
+                {% endif %}
+                {% if page_user.instagram_url %}    
+                    | <i><a href="{{page_user.instagram_url}}" class="link-dark" style="text-decoration: none;"> Instagram </a> </i>
+                {% endif %}
+                {% if page_user.linkedin_url %}       
+                    | <i> <a href="{{page_user.linkedin_url}}" class="link-dark" style="text-decoration: none;"> Linkedin </a> </i>
+                {% endif %}
+                {% if page_user.twitter_url %}    
+                    | <i> <a href="{{page_user.twitter_url}}" class="link-dark" style="text-decoration: none;"> Twitter </a> </i>
+                {% endif %}
+            </small></p>
+              <p class="card-text">{{ page_user.bio }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%if user.is_authenticated %}
+      {% if user.id == profile.user.id %}
+      <a href="{% url 'edit_profile_page' user.profile.id %}" class="btn btn-warning">UPDATE</a>
+      {% endif %}
+      {% endif %}
+
+
+
+{% endblock %}

@@ -1,8 +1,8 @@
 from typing import Any, Dict
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from . models import Post, Category
-from . forms import PostForm, EditForm
+from . models import Post, Category, Comment
+from . forms import PostForm, EditForm, CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
@@ -38,8 +38,8 @@ def CategoryListView(request):
     return render(request,'categories_list.html',{'cat_menu_list':cat_menu_list})
 
 def CategoryView(request,cats):
-    category_post=Post.objects.filter(category=cats.replace('-',' '))
-    return render(request,'categories.html',{'cats':cats.title().replace('-',' '),'category_post':category_post})
+    category_post=Post.objects.filter(category=cats.replace('-',' ').title())
+    return render(request,'categories.html',{'cats':cats.title(),'category_post':category_post})
 
 class ArticleDetailView(DetailView):
     model=Post
@@ -63,8 +63,16 @@ class AddPostView(CreateView):
     model=Post
     form_class=PostForm
     template_name="add_post.html"
-    #fields='__all__' #puts all the fields
+    # fields='__all__' #puts all the fields
 
+class AddCommentView(CreateView):
+    model=Comment 
+    form_class=CommentForm
+    template_name="add_comment.html";  
+    def form_valid(self, form):
+        form.instance.post_id=self.kwargs['pk']
+        return super().form_valid(form) 
+    success_url=reverse_lazy('home')
 
 class AddCategoryView(CreateView):
     model=Category

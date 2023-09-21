@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    {{cats}} Blogs
+{% endblock %}
 
 {% block content %}
 
@@ -10,12 +13,14 @@
     <ul>
     <li><h5><a href="{% url 'article-detail' post.pk %}" class="text-decoration-none link-secondary">{{ post.title }}</a></h5> 
         by <i>{{ post.author.first_name }}&nbsp;{{ post.author.last_name }}</i> | created on <i>{{ post.post_date }}</i> <br><br>
-        <b>{{ post.category }}</b> | "{{post.body|slice:":100"|safe}}..."
+        <b>{{ post.category }}</b> | {{ post.snippet }}
         {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
          <br><br>
-         <small><a href="{% url 'update_post' post.pk %}"><button class="btn btn-warning btn-sm">Edit</button></small></a> &nbsp;
-         <small><a href="{% url 'delete_post' post.pk %}"><button class="btn btn-danger btn-sm">Delete</button></small></a>
+         <small><a href="{% url 'update_post' post.pk %}"><button class="btn btn-warning btn-sm">EDIT</button></small></a> &nbsp;
+         <small><a href="{% url 'delete_post' post.pk %}"><button class="btn btn-danger btn-sm">DELETE</button></small></a>
          <br><br>
+        {% endif %}
         {% endif %}
         <hr>
     </li>
